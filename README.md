@@ -1,3 +1,12 @@
+1. Textinput.txt file contains the article.
+
+2. lines.py import the article and broke the articles into lines
+
+3. main.py take the lines , font and generate image with Pillow package
+
+
+
+
 pip install pytesseract Pillow
 
 import os
