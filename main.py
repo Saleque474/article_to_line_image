@@ -23,19 +23,11 @@ async def generate_images():
             except:
                 u=0
             f.close()
-        u+=1
+        
         for _i,l in enumerate(lines):
             tasks.append(asyncio.create_task(each_task(l,u,_i,_font)))
-
-        # for _i,l in enumerate(lines):
-        #     i=_i+2
-        #     with open(f"{i}.gt.txt",'w') as file:
-        #         file.write(l)
-        #         file.close()
-        #     print(i,l)
     await asyncio.gather(*tasks)
 async def each_task(l,u,_i,_font):
-    i=_i+u
     width=int(512*4)
     img = np.full((40,width,3),255, np.uint8)
     pil_im = Image.fromarray(img)
@@ -47,6 +39,8 @@ async def each_task(l,u,_i,_font):
         l=l[s+1:e]
     except:
         return
+    u+=1
+    i=_i+u
     l=l.strip()
     draw.text((0, 4), l, font=font, fill='black',align="center")
     cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
